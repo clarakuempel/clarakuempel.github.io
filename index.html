@@ -30,7 +30,7 @@
       --blue:#5a78ff; --mx-rgb:90,120,255; --on-blue:#161a28; --tile:#14161c;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-y: scroll; }
     body {
       background: var(--paper); color: var(--ink);
       font-family: "Inter", -apple-system, sans-serif;
@@ -129,7 +129,7 @@
     .work-row:hover, .work-row.active { transform: translateX(0.4rem); border-color: var(--blue); }
     .work-row.active .wt { color: var(--blue); }
 
-    .work-preview { margin-top: 1.4rem; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .work-preview { margin-top: 1.4rem; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; min-height: 312px; }
     .wp { display: none; }
     .wp.show { display: block; }
     .wp .pv { height: 110px; background: var(--tile); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--line); }
