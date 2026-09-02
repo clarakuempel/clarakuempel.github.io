@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -142,6 +142,7 @@
     .wp .pl a { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; color: var(--blue); text-decoration: none; border-bottom: 1px solid var(--blue); }
     .wp .pl a:hover { opacity: 0.7; }
     .wp .pl .soon { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; color: var(--muted); }
+    .wi-detail { display: none; }  /* shown inline only on touch / narrow screens */
 
     /* footer */
     footer { margin-top: 2rem; padding-top: 1.1rem; border-top: 1px solid var(--line); display: flex; gap: 1.2rem; align-items: baseline; }
@@ -150,9 +151,9 @@
     footer .fmail:hover { opacity: 0.7; }
 
     /* theme toggle */
-    .toggle { position: fixed; top: 1.4rem; right: 1.4rem; width: 36px; height: 36px; border: 1px solid var(--muted); border-radius: 999px; background: var(--paper); color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 60; transition: all 0.2s; }
-    .toggle:hover { color: var(--blue); border-color: var(--blue); }
-    .toggle svg { width: 14px; height: 14px; }
+    .toggle { position: fixed; top: 1.4rem; right: 1.4rem; width: 42px; height: 42px; border: 1.5px solid var(--muted); border-radius: 999px; background: var(--tile); color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 60; transition: all 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.25); }
+    .toggle:hover { color: var(--blue); border-color: var(--blue); transform: scale(1.07); }
+    .toggle svg { width: 17px; height: 17px; }
     :root[data-theme="dark"] .toggle .sun{display:block} :root[data-theme="dark"] .toggle .moon{display:none}
     :root[data-theme="light"] .toggle .sun{display:none} :root[data-theme="light"] .toggle .moon{display:block}
 
@@ -165,6 +166,20 @@
       .work-preview { position: static; margin-top: 1.2rem; }
     }
     @media (max-width: 560px) { .idrow { gap: 0.9rem; } .cluster { display: none; } }
+
+    /* Touch / no-hover devices: no hover preview — show each project's details inline */
+    @media (hover: none), (max-width: 900px) {
+      .work-preview { display: none; }
+      .work-row { border-bottom: none; margin-bottom: 0; padding-bottom: 0.15rem; cursor: default; }
+      .work-row:hover, .work-row.active { transform: none; border-color: var(--line); }
+      .work-row.active .wt { color: inherit; }
+      .wi-detail { display: block; padding: 0.1rem 0 0.9rem 2.5rem; border-bottom: 1px solid var(--line); }
+      .wi-detail .d-ps { font-size: 0.82rem; line-height: 1.45; color: var(--ink); opacity: 0.85; }
+      .wi-detail .d-ps em { font-style: italic; }
+      .wi-detail .d-pl { display: block; margin-top: 0.45rem; }
+      .wi-detail .d-pl a { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; color: var(--blue); text-decoration: none; border-bottom: 1px solid var(--blue); }
+      .wi-detail .d-pl .soon { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; color: var(--muted); }
+    }
   </style>
 </head>
 <body>
@@ -180,7 +195,7 @@
           <img class="photo" src="images/clara.jpg" alt="Clara Kümpel" />
           <div class="idtext">
             <h1 class="name">Clara Kümpel</h1>
-            <p class="tagline">learning theory · neuroscience-inspired AI<br /><span class="loc">Zürich // London</span></p>
+            <p class="tagline">learning theory · neuroscience-inspired AI<br /><span class="loc">Saarbrücken // Zürich // London</span></p>
             <div class="socials">
               <a href="mailto:ckuempel@ethz.ch" title="Email"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
               <a href="https://x.com/clarakuempel" target="_blank" title="Twitter / X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.738-8.835L1.254 2.25H8.08l4.259 5.632L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></a>
@@ -200,7 +215,10 @@
           </p>
           <p>
             Recently, I am mostly interested in learning dynamics and optimisation to improve learning in
-            neural networks from an efficiency, modular, neuroscience-inspired angle.
+            neural networks from an efficiency, modular, neuroscience-inspired angle. I am a first-year
+            ELLIS PhD student with <a href="https://cispa.de/en/people/c01rebu" target="_blank">Rebekka Burkholz</a>
+            at <a href="https://cispa.de/en" target="_blank">CISPA</a> and
+            <a href="https://www.maths.ox.ac.uk/people/jared.tanner" target="_blank">Jared Tanner</a> at the University of Oxford.
           </p>
           <p>
             During my master's at <span class="place" data-topics="neuro nlp learning">ETH Zürich</span>, I spent
@@ -228,6 +246,8 @@
         <div class="news-block">
           <div class="news-head"><span class="nh">News</span></div>
           <ul class="news">
+            <li><span class="when">September 2026</span><span class="txt">Started my PhD! 🏄‍♀️</span></li>
+            <li><span class="when">September 2026</span><span class="txt">Attending the <a href="https://www.heidelberg-laureate-forum.org/" target="_blank">13th Heidelberg Laureate Forum</a>, bringing together young researchers with laureates in computer science and mathematics</span></li>
             <li><span class="when">July 2026</span><span class="txt"><span class="tag">oral</span>I will be giving an Oral Presentation at <em>ACL</em> 2026 in San Diego</span></li>
             <li><span class="when">June 2026</span><span class="txt">Finished my Master's at ETH Zürich in Computer Science</span></li>
             <li><span class="when">June 2026</span><span class="txt"><span class="tag">spotlight</span>Invited Spotlight talk at the 7th International Conference on the Mathematics of Neuroscience and AI in Rome</span></li>
@@ -249,6 +269,7 @@
       <aside class="side">
         <div class="exp">
           <h2>Experience</h2>
+          <div class="xitem"><div class="xwhen">2026 – now</div><div class="xrole">ELLIS PhD Student</div><div class="xorg">CISPA &amp; University of Oxford <span class="adv">· Rebekka Burkholz, Jared Tanner</span></div></div>
           <div class="xitem"><div class="xwhen">2025 / 2026</div><div class="xrole">Predoctoral Researcher</div><div class="xorg">Gatsby Unit, UCL <span class="adv">· Andrew Saxe</span></div></div>
           <div class="xitem"><div class="xwhen">2025 – now</div><div class="xrole">Research Assistant</div><div class="xorg">Energy Policy Group, ETH Zürich</div></div>
           <div class="xitem"><div class="xwhen">2024</div><div class="xrole">Visiting Researcher</div><div class="xorg">Mila, Montréal <span class="adv">· Blake Richards</span></div></div>
@@ -265,7 +286,7 @@
           </div>
           <div class="cgroup">
             <h4>Art</h4>
-            <p>I'm organizing a workshop on using art for science at the Heidelberg Laureate Forum. <a href="https://demian-goos.de/isap-2025-12th-hlf/" target="_blank">Last year's exhibition ↗</a></p>
+            <p>I'm organizing a workshop on using art for science at the Heidelberg Laureate Forum. <a href="https://demian-goos.de/isap-2026-13th-hlf/" target="_blank">This year's exhibition ↗</a></p>
           </div>
           <div class="cgroup">
             <h4>Scientific community</h4>
@@ -344,6 +365,19 @@
     rows.forEach(r => {
       r.addEventListener('mouseenter', () => showWork(r.dataset.id));
       r.addEventListener('click', () => showWork(r.dataset.id));
+    });
+
+    // Touch / narrow screens can't hover — inject each project's details inline (built from the preview blocks)
+    rows.forEach(r => {
+      const wp = document.querySelector('.wp[data-id="' + r.dataset.id + '"]');
+      if (!wp) return;
+      const ps = wp.querySelector('.ps');
+      const pl = wp.querySelector('.pl');
+      const d = document.createElement('div');
+      d.className = 'wi-detail';
+      d.innerHTML = (ps ? '<span class="d-ps">' + ps.innerHTML + '</span>' : '')
+                  + (pl ? '<span class="d-pl">' + pl.innerHTML + '</span>' : '');
+      r.after(d);
     });
 
     // ── Weight-matrix signature ──
